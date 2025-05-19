@@ -1,8 +1,7 @@
-#include <stdio.h>
-#include <WinSock2.h>
+#include "server.h"
 
 int main()
 {
-	printf("Hello World");
+	start_server(PORT);
 	return 0;
 }

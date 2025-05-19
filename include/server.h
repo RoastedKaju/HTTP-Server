@@ -1,6 +1,11 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+#include "common.h"
+
+static SOCKET server_socket = INVALID_SOCKET;
+static struct sockaddr_in server_address;
+
 /**
 * Start Http server
 * @param port The port number to listen on
