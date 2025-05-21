@@ -19,3 +19,21 @@ add_executable(HttpServer ${SOURCES})
 if(WIN32)
 	target_link_libraries(HttpServer ws2_32)
 endif()
+
+# Set the output directory
+set_target_properties(HttpServer PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_BINARY_DIR}/Debug
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/Release
+)
+
+# Function to copy www folder
+function(copy_www TARGET_NAME)
+    add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_SOURCE_DIR}/www"
+            "$<TARGET_FILE_DIR:${TARGET_NAME}>/www"
+        COMMENT "Copying www folder to output directory"
+    )
+endfunction()
+
+copy_www(HttpServer)
